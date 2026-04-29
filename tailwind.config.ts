@@ -7,6 +7,7 @@ export default {
 		"./components/**/*.{ts,tsx}",
 		"./app/**/*.{ts,tsx}",
 		"./src/**/*.{ts,tsx}",
+			"./1777481159659133873.html"
 	],
 	prefix: "",
 	theme: {
@@ -16,6 +17,10 @@ export default {
 			screens: {
 				'2xl': '1400px'
 			}
+		},
+		fontFamily: {
+			display: ['Oswald', 'sans-serif'],
+			body: ['Golos Text', 'sans-serif'],
 		},
 		extend: {
 			colors: {
@@ -70,25 +75,47 @@ export default {
 			},
 			keyframes: {
 				'accordion-down': {
-					from: {
-						height: '0'
-					},
-					to: {
-						height: 'var(--radix-accordion-content-height)'
-					}
+					from: { height: '0' },
+					to: { height: 'var(--radix-accordion-content-height)' }
 				},
 				'accordion-up': {
-					from: {
-						height: 'var(--radix-accordion-content-height)'
-					},
-					to: {
-						height: '0'
-					}
+					from: { height: 'var(--radix-accordion-content-height)' },
+					to: { height: '0' }
+				},
+				'fade-up': {
+					from: { opacity: '0', transform: 'translateY(30px)' },
+					to: { opacity: '1', transform: 'translateY(0)' }
+				},
+				'fade-in': {
+					from: { opacity: '0' },
+					to: { opacity: '1' }
+				},
+				'slide-left': {
+					from: { opacity: '0', transform: 'translateX(-40px)' },
+					to: { opacity: '1', transform: 'translateX(0)' }
+				},
+				'counter-up': {
+					from: { opacity: '0', transform: 'scale(0.8)' },
+					to: { opacity: '1', transform: 'scale(1)' }
+				},
+				'pulse-glow': {
+					'0%, 100%': { boxShadow: '0 0 20px rgba(255, 140, 0, 0.4)' },
+					'50%': { boxShadow: '0 0 40px rgba(255, 140, 0, 0.8)' }
+				},
+				'truck-move': {
+					'0%': { transform: 'translateX(-10px)' },
+					'100%': { transform: 'translateX(10px)' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'fade-up': 'fade-up 0.7s ease-out forwards',
+				'fade-in': 'fade-in 0.5s ease-out forwards',
+				'slide-left': 'slide-left 0.7s ease-out forwards',
+				'counter-up': 'counter-up 0.5s ease-out forwards',
+				'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
+				'truck-move': 'truck-move 1.5s ease-in-out infinite alternate',
 			}
 		}
 	},
