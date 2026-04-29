@@ -20,12 +20,6 @@ const STATS = [
   { value: "99.8%", label: "Сохранность грузов" },
 ];
 
-const GALLERY = [
-  { src: HERO_IMAGE, title: "Логистический хаб" },
-  { src: HERO_IMAGE, title: "Автопарк компании" },
-  { src: HERO_IMAGE, title: "Складской комплекс" },
-  { src: HERO_IMAGE, title: "Международные перевозки" },
-];
 
 const TEAM = [
   { name: "Алексей Воронов", role: "Генеральный директор", exp: "20 лет в логистике" },
@@ -43,7 +37,6 @@ export default function Index() {
     { id: "home", label: "Главная" },
     { id: "services", label: "Услуги" },
     { id: "about", label: "О компании" },
-    { id: "gallery", label: "Галерея" },
     { id: "contacts", label: "Контакты" },
   ];
 
@@ -290,34 +283,6 @@ export default function Index() {
               </div>
               <p className="text-gray-500 text-sm">Лауреат «Транспорт России 2023» · ISO 9001:2015 · Член ассоциации АСМАП</p>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* GALLERY */}
-      <section id="gallery" className="py-24 bg-blue-50 border-y border-blue-100">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <span className="text-[#1D4ED8] text-sm font-bold uppercase tracking-widest">Наши объекты</span>
-            <h2 className="font-display text-4xl md:text-5xl font-black mt-3 text-gray-900">ГАЛЕРЕЯ</h2>
-            <div className="w-16 h-1.5 bg-gradient-to-r from-[#1D4ED8] to-[#60A5FA] mx-auto mt-4 rounded-full" />
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {GALLERY.map((item, i) => (
-              <div key={i} className="group relative overflow-hidden rounded-2xl aspect-video cursor-pointer shadow-lg shadow-blue-200/40">
-                <img src={item.src} alt={item.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1E3A8A]/80 via-[#1D4ED8]/20 to-transparent" />
-                <div className="absolute inset-0 bg-[#1D4ED8]/0 group-hover:bg-[#1D4ED8]/15 transition-all duration-300" />
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <h3 className="font-display text-xl font-bold text-white">{item.title}</h3>
-                </div>
-                <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="bg-white rounded-full p-2 shadow-md">
-                    <Icon name="Expand" size={16} className="text-[#1D4ED8]" />
-                  </div>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </section>
