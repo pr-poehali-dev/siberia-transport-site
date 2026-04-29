@@ -13,12 +13,12 @@ const ROUTES = [
 ];
 
 const SERVICES = [
-  { icon: "Truck", title: "Автодоставка", desc: "Доставка грузов автомобильным транспортом по всей России и СНГ", color: "#FF8C00" },
-  { icon: "Package", title: "Складирование", desc: "Ответственное хранение на современных складских комплексах", color: "#FFB700" },
-  { icon: "Shield", title: "Страхование", desc: "Полное страхование груза на весь период транспортировки", color: "#FF6B35" },
-  { icon: "BarChart3", title: "Аналитика", desc: "Отчёты и аналитика по всем перевозкам в личном кабинете", color: "#FF8C00" },
-  { icon: "Globe", title: "Международная логистика", desc: "Экспорт и импорт грузов в страны СНГ и Европы", color: "#FFB700" },
-  { icon: "Zap", title: "Срочная доставка", desc: "Экспресс-доставка в кратчайшие сроки с гарантией", color: "#FF6B35" },
+  { icon: "Truck", title: "Автодоставка", desc: "Доставка грузов автомобильным транспортом по всей России и СНГ", color: "#1D4ED8" },
+  { icon: "Package", title: "Складирование", desc: "Ответственное хранение на современных складских комплексах", color: "#2563EB" },
+  { icon: "Shield", title: "Страхование", desc: "Полное страхование груза на весь период транспортировки", color: "#1E40AF" },
+  { icon: "BarChart3", title: "Аналитика", desc: "Отчёты и аналитика по всем перевозкам в личном кабинете", color: "#1D4ED8" },
+  { icon: "Globe", title: "Международная логистика", desc: "Экспорт и импорт грузов в страны СНГ и Европы", color: "#2563EB" },
+  { icon: "Zap", title: "Срочная доставка", desc: "Экспресс-доставка в кратчайшие сроки с гарантией", color: "#1E40AF" },
 ];
 
 const STATS = [
@@ -68,9 +68,7 @@ export default function Index() {
         if (el) {
           const top = el.offsetTop - 100;
           const bottom = top + el.offsetHeight;
-          if (scrollY >= top && scrollY < bottom) {
-            setActiveSection(s.id);
-          }
+          if (scrollY >= top && scrollY < bottom) setActiveSection(s.id);
         }
       }
     };
@@ -101,16 +99,18 @@ export default function Index() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0A0A0F] text-white font-body overflow-x-hidden">
+    <div className="min-h-screen bg-white text-gray-900 font-body overflow-x-hidden">
 
       {/* NAV */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0A0A0F]/90 backdrop-blur-md border-b border-white/5">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-blue-100 shadow-sm">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2 cursor-pointer" onClick={() => scrollTo("home")}>
-            <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-[#FF8C00] to-[#FFB700] flex items-center justify-center animate-pulse-glow">
-              <Icon name="Truck" size={18} className="text-black" />
+            <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-[#1D4ED8] to-[#2563EB] flex items-center justify-center shadow-md shadow-blue-200">
+              <Icon name="Truck" size={18} className="text-white" />
             </div>
-            <span className="font-display text-xl font-bold tracking-wider text-white">ТРАНС<span className="text-[#FF8C00]">ЛОГИСТ</span></span>
+            <span className="font-display text-xl font-bold tracking-tight text-gray-900">
+              ТРАНС<span className="text-[#1D4ED8]">ЛОГИСТ</span>
+            </span>
           </div>
 
           <div className="hidden md:flex items-center gap-1">
@@ -118,10 +118,10 @@ export default function Index() {
               <button
                 key={s.id}
                 onClick={() => scrollTo(s.id)}
-                className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 font-body ${
+                className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
                   activeSection === s.id
-                    ? "text-[#FF8C00] bg-[#FF8C00]/10"
-                    : "text-white/60 hover:text-white hover:bg-white/5"
+                    ? "text-[#1D4ED8] bg-blue-50"
+                    : "text-gray-500 hover:text-gray-900 hover:bg-gray-50"
                 }`}
               >
                 {s.label}
@@ -130,7 +130,7 @@ export default function Index() {
           </div>
 
           <button
-            className="md:hidden text-white/70 hover:text-white"
+            className="md:hidden text-gray-500 hover:text-gray-900"
             onClick={() => setMobileOpen(!mobileOpen)}
           >
             <Icon name={mobileOpen ? "X" : "Menu"} size={24} />
@@ -138,13 +138,13 @@ export default function Index() {
         </div>
 
         {mobileOpen && (
-          <div className="md:hidden bg-[#0F0F1A] border-t border-white/5 px-6 py-4 flex flex-col gap-1">
+          <div className="md:hidden bg-white border-t border-blue-50 px-6 py-4 flex flex-col gap-1">
             {sections.map((s) => (
               <button
                 key={s.id}
                 onClick={() => scrollTo(s.id)}
                 className={`text-left px-4 py-3 rounded-lg text-sm font-medium transition-all ${
-                  activeSection === s.id ? "text-[#FF8C00] bg-[#FF8C00]/10" : "text-white/70 hover:text-white"
+                  activeSection === s.id ? "text-[#1D4ED8] bg-blue-50" : "text-gray-600 hover:text-gray-900"
                 }`}
               >
                 {s.label}
@@ -156,35 +156,33 @@ export default function Index() {
 
       {/* HERO */}
       <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${HERO_IMAGE})` }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0F]/70 via-[#0A0A0F]/60 to-[#0A0A0F]" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0F]/80 via-transparent to-[#0A0A0F]/40" />
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${HERO_IMAGE})` }} />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1D4ED8]/80 via-[#1E3A8A]/70 to-white" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#1E3A8A]/60 via-transparent to-[#1D4ED8]/20" />
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-white" style={{ clipPath: "polygon(0 60%, 100% 0, 100% 100%, 0 100%)" }} />
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 pt-20 w-full">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 bg-[#FF8C00]/20 border border-[#FF8C00]/30 rounded-full px-4 py-2 mb-6 animate-fade-up" style={{ animationDelay: "0.1s", opacity: 0 }}>
-              <div className="w-2 h-2 rounded-full bg-[#FF8C00] animate-pulse" />
-              <span className="text-[#FF8C00] text-sm font-medium">Надёжная логистика с 2012 года</span>
+            <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full px-4 py-2 mb-6 animate-fade-up" style={{ animationDelay: "0.1s", opacity: 0 }}>
+              <div className="w-2 h-2 rounded-full bg-white animate-pulse" />
+              <span className="text-white text-sm font-medium">Надёжная логистика с 2012 года</span>
             </div>
 
             <h1
-              className="font-display text-5xl md:text-7xl font-bold leading-tight mb-6 animate-fade-up"
+              className="font-display text-5xl md:text-7xl font-black leading-tight mb-6 text-white animate-fade-up"
               style={{ animationDelay: "0.2s", opacity: 0 }}
             >
               ДОСТАВИМ
               <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF8C00] to-[#FFB700]">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-blue-200">
                 КУДА УГОДНО
               </span>
               <br />
-              <span className="text-white/80 text-4xl md:text-5xl">В СРОК</span>
+              <span className="text-white/80 text-4xl md:text-5xl font-bold">В СРОК</span>
             </h1>
 
             <p
-              className="text-white/60 text-lg md:text-xl leading-relaxed mb-10 max-w-xl animate-fade-up"
+              className="text-white/80 text-lg md:text-xl leading-relaxed mb-10 max-w-xl animate-fade-up"
               style={{ animationDelay: "0.4s", opacity: 0 }}
             >
               Профессиональная перевозка грузов по России и СНГ. Собственный автопарк, страхование, контроль на каждом этапе.
@@ -193,7 +191,7 @@ export default function Index() {
             <div className="flex flex-wrap gap-4 animate-fade-up" style={{ animationDelay: "0.5s", opacity: 0 }}>
               <button
                 onClick={() => scrollTo("calculator")}
-                className="group flex items-center gap-3 bg-gradient-to-r from-[#FF8C00] to-[#FFB700] text-black font-bold px-8 py-4 rounded-xl text-base hover:scale-105 transition-all duration-200 shadow-lg shadow-[#FF8C00]/30"
+                className="group flex items-center gap-3 bg-white text-[#1D4ED8] font-bold px-8 py-4 rounded-xl text-base hover:scale-105 transition-all duration-200 shadow-xl shadow-blue-900/30"
               >
                 <Icon name="Calculator" size={20} />
                 Рассчитать стоимость
@@ -201,7 +199,7 @@ export default function Index() {
               </button>
               <button
                 onClick={() => scrollTo("contacts")}
-                className="flex items-center gap-3 border border-white/20 text-white font-medium px-8 py-4 rounded-xl text-base hover:bg-white/5 hover:border-white/40 transition-all duration-200"
+                className="flex items-center gap-3 border-2 border-white/50 text-white font-medium px-8 py-4 rounded-xl text-base hover:bg-white/10 hover:border-white transition-all duration-200"
               >
                 Связаться с нами
               </button>
@@ -209,13 +207,13 @@ export default function Index() {
           </div>
         </div>
 
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-          <Icon name="ChevronDown" size={28} className="text-[#FF8C00]/60" />
+        <div className="absolute bottom-14 left-1/2 -translate-x-1/2 animate-bounce z-10">
+          <Icon name="ChevronDown" size={28} className="text-[#1D4ED8]" />
         </div>
       </section>
 
       {/* STATS */}
-      <div ref={statsRef} className="bg-[#0F0F1A] border-y border-white/5 py-12">
+      <div ref={statsRef} className="bg-white border-b border-blue-100 py-14">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {STATS.map((s, i) => (
@@ -224,10 +222,8 @@ export default function Index() {
                 className={`text-center transition-all duration-700 ${visibleStats ? "animate-counter-up" : "opacity-0"}`}
                 style={{ animationDelay: `${i * 0.15}s` }}
               >
-                <div className="font-display text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#FF8C00] to-[#FFB700] mb-1">
-                  {s.value}
-                </div>
-                <div className="text-white/50 text-sm">{s.label}</div>
+                <div className="font-display text-3xl md:text-4xl font-black text-[#1D4ED8] mb-1">{s.value}</div>
+                <div className="text-gray-500 text-sm font-medium">{s.label}</div>
               </div>
             ))}
           </div>
@@ -237,47 +233,46 @@ export default function Index() {
       {/* SERVICES */}
       <section id="services" className="py-24 max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
-          <span className="text-[#FF8C00] text-sm font-semibold uppercase tracking-widest">Что мы делаем</span>
-          <h2 className="font-display text-4xl md:text-5xl font-bold mt-3 text-white">НАШИ УСЛУГИ</h2>
-          <div className="w-16 h-1 bg-gradient-to-r from-[#FF8C00] to-[#FFB700] mx-auto mt-4 rounded-full" />
+          <span className="text-[#1D4ED8] text-sm font-bold uppercase tracking-widest">Что мы делаем</span>
+          <h2 className="font-display text-4xl md:text-5xl font-black mt-3 text-gray-900">НАШИ УСЛУГИ</h2>
+          <div className="w-16 h-1.5 bg-gradient-to-r from-[#1D4ED8] to-[#60A5FA] mx-auto mt-4 rounded-full" />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {SERVICES.map((s, i) => (
             <div
               key={i}
-              className="group bg-[#0F0F1A] border border-white/5 rounded-2xl p-8 hover:border-[#FF8C00]/40 hover:bg-[#FF8C00]/5 transition-all duration-300 hover:-translate-y-1 cursor-pointer"
+              className="group bg-white border border-blue-100 rounded-2xl p-8 hover:border-[#1D4ED8]/40 hover:shadow-lg hover:shadow-blue-100 transition-all duration-300 hover:-translate-y-1 cursor-pointer"
             >
               <div
                 className="w-14 h-14 rounded-xl flex items-center justify-center mb-6 transition-all duration-300 group-hover:scale-110"
-                style={{ backgroundColor: s.color + "20", border: `1px solid ${s.color}40` }}
+                style={{ backgroundColor: s.color + "15", border: `1.5px solid ${s.color}30` }}
               >
                 <Icon name={s.icon} size={26} style={{ color: s.color }} />
               </div>
-              <h3 className="font-display text-xl font-bold text-white mb-3 tracking-wide">{s.title}</h3>
-              <p className="text-white/50 text-sm leading-relaxed">{s.desc}</p>
+              <h3 className="font-display text-xl font-bold text-gray-900 mb-3">{s.title}</h3>
+              <p className="text-gray-500 text-sm leading-relaxed">{s.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* CALCULATOR */}
-      <section id="calculator" className="py-24 bg-[#0F0F1A] border-y border-white/5">
+      <section id="calculator" className="py-24 bg-blue-50 border-y border-blue-100">
         <div className="max-w-3xl mx-auto px-6">
           <div className="text-center mb-12">
-            <span className="text-[#FF8C00] text-sm font-semibold uppercase tracking-widest">Быстро и точно</span>
-            <h2 className="font-display text-4xl md:text-5xl font-bold mt-3 text-white">КАЛЬКУЛЯТОР</h2>
-            <p className="text-white/40 mt-1 text-sm tracking-widest">СТОИМОСТИ ДОСТАВКИ</p>
-            <div className="w-16 h-1 bg-gradient-to-r from-[#FF8C00] to-[#FFB700] mx-auto mt-4 rounded-full" />
+            <span className="text-[#1D4ED8] text-sm font-bold uppercase tracking-widest">Быстро и точно</span>
+            <h2 className="font-display text-4xl md:text-5xl font-black mt-3 text-gray-900">КАЛЬКУЛЯТОР</h2>
+            <p className="text-gray-400 mt-1 text-sm tracking-widest uppercase">стоимости доставки</p>
+            <div className="w-16 h-1.5 bg-gradient-to-r from-[#1D4ED8] to-[#60A5FA] mx-auto mt-4 rounded-full" />
           </div>
 
-          <div className="bg-[#0A0A0F] border border-white/10 rounded-3xl p-8 md:p-10 shadow-2xl shadow-black/50">
+          <div className="bg-white border border-blue-100 rounded-3xl p-8 md:p-10 shadow-xl shadow-blue-100/60">
             <div className="space-y-8">
 
-              {/* Route */}
               <div>
-                <label className="flex items-center gap-2 text-white/70 text-sm font-medium mb-3">
-                  <Icon name="MapPin" size={16} className="text-[#FF8C00]" />
+                <label className="flex items-center gap-2 text-gray-600 text-sm font-semibold mb-3">
+                  <Icon name="MapPin" size={16} className="text-[#1D4ED8]" />
                   Маршрут
                 </label>
                 <div className="grid grid-cols-1 gap-2">
@@ -287,8 +282,8 @@ export default function Index() {
                       onClick={() => { setRouteIndex(i); setCalcDone(false); }}
                       className={`text-left px-5 py-3.5 rounded-xl text-sm font-medium transition-all duration-200 border ${
                         routeIndex === i
-                          ? "bg-[#FF8C00]/15 border-[#FF8C00]/50 text-[#FF8C00]"
-                          : "border-white/5 text-white/50 hover:border-white/20 hover:text-white/80"
+                          ? "bg-blue-50 border-[#1D4ED8]/50 text-[#1D4ED8]"
+                          : "border-gray-200 text-gray-500 hover:border-blue-200 hover:text-gray-800 hover:bg-blue-50/50"
                       }`}
                     >
                       <span>{r.label}</span>
@@ -298,11 +293,10 @@ export default function Index() {
                 </div>
               </div>
 
-              {/* Weight */}
               <div>
-                <label className="flex items-center gap-2 text-white/70 text-sm font-medium mb-3">
-                  <Icon name="Weight" size={16} className="text-[#FF8C00]" />
-                  Вес груза: <span className="text-[#FF8C00] font-bold ml-1">{weight.toLocaleString()} кг</span>
+                <label className="flex items-center gap-2 text-gray-600 text-sm font-semibold mb-3">
+                  <Icon name="Weight" size={16} className="text-[#1D4ED8]" />
+                  Вес груза: <span className="text-[#1D4ED8] font-bold ml-1">{weight.toLocaleString()} кг</span>
                 </label>
                 <input
                   type="range"
@@ -313,25 +307,21 @@ export default function Index() {
                   onChange={(e) => { setWeight(Number(e.target.value)); setCalcDone(false); }}
                   className="w-full h-2 rounded-full appearance-none cursor-pointer"
                   style={{
-                    background: `linear-gradient(to right, #FF8C00 0%, #FFB700 ${(weight / 10000) * 100}%, #1a1a2e ${(weight / 10000) * 100}%, #1a1a2e 100%)`,
+                    background: `linear-gradient(to right, #1D4ED8 0%, #60A5FA ${(weight / 10000) * 100}%, #E2E8F0 ${(weight / 10000) * 100}%, #E2E8F0 100%)`,
                   }}
                 />
-                <div className="flex justify-between text-white/30 text-xs mt-2">
-                  <span>10 кг</span>
-                  <span>2 500 кг</span>
-                  <span>5 000 кг</span>
-                  <span>10 000 кг</span>
+                <div className="flex justify-between text-gray-400 text-xs mt-2">
+                  <span>10 кг</span><span>2 500 кг</span><span>5 000 кг</span><span>10 000 кг</span>
                 </div>
-
                 <div className="grid grid-cols-4 gap-2 mt-4">
                   {[100, 500, 1000, 5000].map((w) => (
                     <button
                       key={w}
                       onClick={() => { setWeight(w); setCalcDone(false); }}
-                      className={`py-2 rounded-lg text-xs font-medium transition-all border ${
+                      className={`py-2 rounded-lg text-xs font-semibold transition-all border ${
                         weight === w
-                          ? "bg-[#FF8C00]/15 border-[#FF8C00]/50 text-[#FF8C00]"
-                          : "border-white/10 text-white/40 hover:text-white/70 hover:border-white/20"
+                          ? "bg-blue-50 border-[#1D4ED8]/50 text-[#1D4ED8]"
+                          : "border-gray-200 text-gray-400 hover:text-gray-700 hover:border-blue-200"
                       }`}
                     >
                       {w} кг
@@ -340,29 +330,25 @@ export default function Index() {
                 </div>
               </div>
 
-              {/* Button */}
               <button
                 onClick={calcPrice}
-                className="w-full bg-gradient-to-r from-[#FF8C00] to-[#FFB700] text-black font-bold py-4 rounded-xl text-base hover:scale-[1.02] transition-all duration-200 shadow-lg shadow-[#FF8C00]/30 flex items-center justify-center gap-3"
+                className="w-full bg-gradient-to-r from-[#1D4ED8] to-[#2563EB] text-white font-bold py-4 rounded-xl text-base hover:scale-[1.02] transition-all duration-200 shadow-lg shadow-blue-300/40 flex items-center justify-center gap-3"
               >
                 <Icon name="Calculator" size={20} />
                 Рассчитать стоимость
               </button>
 
-              {/* Result */}
               {calcDone && calcResult && (
-                <div className="bg-gradient-to-r from-[#FF8C00]/10 to-[#FFB700]/10 border border-[#FF8C00]/30 rounded-2xl p-6 animate-fade-up text-center">
-                  <p className="text-white/60 text-sm mb-2">Ориентировочная стоимость</p>
-                  <p className="font-display text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#FF8C00] to-[#FFB700]">
+                <div className="bg-gradient-to-r from-blue-50 to-blue-100/60 border border-[#1D4ED8]/20 rounded-2xl p-6 animate-fade-up text-center">
+                  <p className="text-gray-500 text-sm mb-2">Ориентировочная стоимость</p>
+                  <p className="font-display text-5xl font-black text-[#1D4ED8]">
                     {calcResult.toLocaleString()} ₽
                   </p>
-                  <p className="text-white/40 text-xs mt-3">
-                    {ROUTES[routeIndex].label} · {weight.toLocaleString()} кг
-                  </p>
-                  <p className="text-white/30 text-xs mt-1">Точная стоимость зависит от типа груза и дополнительных услуг</p>
+                  <p className="text-gray-400 text-xs mt-3">{ROUTES[routeIndex].label} · {weight.toLocaleString()} кг</p>
+                  <p className="text-gray-400 text-xs mt-1">Точная стоимость зависит от типа груза и дополнительных услуг</p>
                   <button
                     onClick={() => scrollTo("contacts")}
-                    className="mt-4 inline-flex items-center gap-2 bg-[#FF8C00] text-black font-bold px-6 py-2.5 rounded-xl text-sm hover:bg-[#FFB700] transition-all"
+                    className="mt-4 inline-flex items-center gap-2 bg-[#1D4ED8] text-white font-bold px-6 py-2.5 rounded-xl text-sm hover:bg-[#1E40AF] transition-all shadow-md shadow-blue-200"
                   >
                     Оформить заявку
                     <Icon name="ArrowRight" size={16} />
@@ -378,15 +364,14 @@ export default function Index() {
       <section id="about" className="py-24 max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div>
-            <span className="text-[#FF8C00] text-sm font-semibold uppercase tracking-widest">Наша история</span>
-            <h2 className="font-display text-4xl md:text-5xl font-bold mt-3 mb-6 text-white">О КОМПАНИИ</h2>
-            <p className="text-white/60 leading-relaxed mb-6">
+            <span className="text-[#1D4ED8] text-sm font-bold uppercase tracking-widest">Наша история</span>
+            <h2 className="font-display text-4xl md:text-5xl font-black mt-3 mb-6 text-gray-900">О КОМПАНИИ</h2>
+            <p className="text-gray-600 leading-relaxed mb-6">
               ТрансЛогист — одна из ведущих транспортно-логистических компаний России. С 2012 года мы обеспечиваем надёжную доставку грузов по всей стране и за рубежом.
             </p>
-            <p className="text-white/60 leading-relaxed mb-8">
+            <p className="text-gray-600 leading-relaxed mb-8">
               Собственный парк из 150+ единиц техники, современные складские комплексы в Москве, Санкт-Петербурге и Екатеринбурге — всё это позволяет нам гарантировать высокое качество услуг.
             </p>
-
             <div className="grid grid-cols-2 gap-4 mb-8">
               {[
                 { icon: "CheckCircle", text: "Собственный автопарк 150+ машин" },
@@ -395,15 +380,14 @@ export default function Index() {
                 { icon: "CheckCircle", text: "GPS-мониторинг 24/7" },
               ].map((item, i) => (
                 <div key={i} className="flex items-start gap-3">
-                  <Icon name={item.icon} size={18} className="text-[#FF8C00] mt-0.5 flex-shrink-0" />
-                  <span className="text-white/60 text-sm">{item.text}</span>
+                  <Icon name={item.icon} size={18} className="text-[#1D4ED8] mt-0.5 flex-shrink-0" />
+                  <span className="text-gray-600 text-sm">{item.text}</span>
                 </div>
               ))}
             </div>
-
             <button
               onClick={() => scrollTo("contacts")}
-              className="inline-flex items-center gap-3 bg-gradient-to-r from-[#FF8C00] to-[#FFB700] text-black font-bold px-8 py-4 rounded-xl hover:scale-105 transition-all duration-200 shadow-lg shadow-[#FF8C00]/30"
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-[#1D4ED8] to-[#2563EB] text-white font-bold px-8 py-4 rounded-xl hover:scale-105 transition-all duration-200 shadow-lg shadow-blue-300/40"
             >
               Сотрудничать с нами
               <Icon name="ArrowRight" size={18} />
@@ -412,54 +396,48 @@ export default function Index() {
 
           <div className="space-y-4">
             {TEAM.map((member, i) => (
-              <div key={i} className="bg-[#0F0F1A] border border-white/5 rounded-2xl p-6 flex items-center gap-5 hover:border-[#FF8C00]/30 transition-all duration-300">
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#FF8C00]/20 to-[#FFB700]/20 border border-[#FF8C00]/20 flex items-center justify-center flex-shrink-0">
-                  <span className="font-display text-xl font-bold text-[#FF8C00]">{member.name[0]}</span>
+              <div key={i} className="bg-white border border-blue-100 rounded-2xl p-6 flex items-center gap-5 hover:border-[#1D4ED8]/30 hover:shadow-md hover:shadow-blue-100 transition-all duration-300">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#1D4ED8]/10 to-[#60A5FA]/20 border border-blue-200 flex items-center justify-center flex-shrink-0">
+                  <span className="font-display text-xl font-black text-[#1D4ED8]">{member.name[0]}</span>
                 </div>
                 <div>
-                  <div className="font-semibold text-white text-base">{member.name}</div>
-                  <div className="text-[#FF8C00] text-sm font-medium">{member.role}</div>
-                  <div className="text-white/40 text-xs mt-0.5">{member.exp}</div>
+                  <div className="font-bold text-gray-900">{member.name}</div>
+                  <div className="text-[#1D4ED8] text-sm font-semibold">{member.role}</div>
+                  <div className="text-gray-400 text-xs mt-0.5">{member.exp}</div>
                 </div>
               </div>
             ))}
-
-            <div className="bg-gradient-to-r from-[#FF8C00]/10 to-[#FFB700]/5 border border-[#FF8C00]/20 rounded-2xl p-6">
+            <div className="bg-gradient-to-r from-blue-50 to-blue-100/40 border border-blue-200 rounded-2xl p-6">
               <div className="flex items-center gap-3 mb-3">
-                <Icon name="Award" size={22} className="text-[#FFB700]" />
-                <span className="font-semibold text-white">Сертификаты и награды</span>
+                <Icon name="Award" size={22} className="text-[#1D4ED8]" />
+                <span className="font-bold text-gray-900">Сертификаты и награды</span>
               </div>
-              <p className="text-white/50 text-sm">Лауреат «Транспорт России 2023» · ISO 9001:2015 · Член ассоциации АСМАП</p>
+              <p className="text-gray-500 text-sm">Лауреат «Транспорт России 2023» · ISO 9001:2015 · Член ассоциации АСМАП</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* GALLERY */}
-      <section id="gallery" className="py-24 bg-[#0F0F1A] border-y border-white/5">
+      <section id="gallery" className="py-24 bg-blue-50 border-y border-blue-100">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
-            <span className="text-[#FF8C00] text-sm font-semibold uppercase tracking-widest">Наши объекты</span>
-            <h2 className="font-display text-4xl md:text-5xl font-bold mt-3 text-white">ГАЛЕРЕЯ</h2>
-            <div className="w-16 h-1 bg-gradient-to-r from-[#FF8C00] to-[#FFB700] mx-auto mt-4 rounded-full" />
+            <span className="text-[#1D4ED8] text-sm font-bold uppercase tracking-widest">Наши объекты</span>
+            <h2 className="font-display text-4xl md:text-5xl font-black mt-3 text-gray-900">ГАЛЕРЕЯ</h2>
+            <div className="w-16 h-1.5 bg-gradient-to-r from-[#1D4ED8] to-[#60A5FA] mx-auto mt-4 rounded-full" />
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {GALLERY.map((item, i) => (
-              <div key={i} className="group relative overflow-hidden rounded-2xl aspect-video cursor-pointer">
-                <img
-                  src={item.src}
-                  alt={item.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                <div className="absolute inset-0 bg-[#FF8C00]/0 group-hover:bg-[#FF8C00]/10 transition-all duration-300" />
+              <div key={i} className="group relative overflow-hidden rounded-2xl aspect-video cursor-pointer shadow-lg shadow-blue-200/40">
+                <img src={item.src} alt={item.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1E3A8A]/80 via-[#1D4ED8]/20 to-transparent" />
+                <div className="absolute inset-0 bg-[#1D4ED8]/0 group-hover:bg-[#1D4ED8]/15 transition-all duration-300" />
                 <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <h3 className="font-display text-xl font-bold text-white tracking-wide">{item.title}</h3>
+                  <h3 className="font-display text-xl font-bold text-white">{item.title}</h3>
                 </div>
                 <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="bg-[#FF8C00] rounded-full p-2">
-                    <Icon name="Expand" size={16} className="text-black" />
+                  <div className="bg-white rounded-full p-2 shadow-md">
+                    <Icon name="Expand" size={16} className="text-[#1D4ED8]" />
                   </div>
                 </div>
               </div>
@@ -471,11 +449,10 @@ export default function Index() {
       {/* CONTACTS */}
       <section id="contacts" className="py-24 max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
-          <span className="text-[#FF8C00] text-sm font-semibold uppercase tracking-widest">Свяжитесь с нами</span>
-          <h2 className="font-display text-4xl md:text-5xl font-bold mt-3 text-white">КОНТАКТЫ</h2>
-          <div className="w-16 h-1 bg-gradient-to-r from-[#FF8C00] to-[#FFB700] mx-auto mt-4 rounded-full" />
+          <span className="text-[#1D4ED8] text-sm font-bold uppercase tracking-widest">Свяжитесь с нами</span>
+          <h2 className="font-display text-4xl md:text-5xl font-black mt-3 text-gray-900">КОНТАКТЫ</h2>
+          <div className="w-16 h-1.5 bg-gradient-to-r from-[#1D4ED8] to-[#60A5FA] mx-auto mt-4 rounded-full" />
         </div>
-
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div className="space-y-6">
             {[
@@ -485,64 +462,48 @@ export default function Index() {
               { icon: "Clock", title: "Режим работы", value: "Пн–Пт: 9:00–18:00", sub: "Диспетчер 24/7" },
             ].map((c, i) => (
               <div key={i} className="flex items-start gap-5 group">
-                <div className="w-12 h-12 rounded-xl bg-[#FF8C00]/10 border border-[#FF8C00]/20 flex items-center justify-center flex-shrink-0 group-hover:bg-[#FF8C00]/20 transition-all">
-                  <Icon name={c.icon} size={20} className="text-[#FF8C00]" />
+                <div className="w-12 h-12 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center flex-shrink-0 group-hover:bg-blue-100 transition-all">
+                  <Icon name={c.icon} size={20} className="text-[#1D4ED8]" />
                 </div>
                 <div>
-                  <div className="text-white/40 text-xs uppercase tracking-wider mb-0.5">{c.title}</div>
-                  <div className="text-white font-semibold">{c.value}</div>
-                  <div className="text-white/40 text-sm">{c.sub}</div>
+                  <div className="text-gray-400 text-xs uppercase tracking-wider mb-0.5 font-semibold">{c.title}</div>
+                  <div className="text-gray-900 font-bold">{c.value}</div>
+                  <div className="text-gray-500 text-sm">{c.sub}</div>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="bg-[#0F0F1A] border border-white/10 rounded-3xl p-8">
-            <h3 className="font-display text-2xl font-bold text-white mb-6">ОСТАВИТЬ ЗАЯВКУ</h3>
+          <div className="bg-white border border-blue-100 rounded-3xl p-8 shadow-xl shadow-blue-100/40">
+            <h3 className="font-display text-2xl font-black text-gray-900 mb-6">ОСТАВИТЬ ЗАЯВКУ</h3>
             <div className="space-y-4">
-              <input
-                type="text"
-                placeholder="Ваше имя"
-                className="w-full bg-[#0A0A0F] border border-white/10 rounded-xl px-5 py-3.5 text-white placeholder-white/30 focus:outline-none focus:border-[#FF8C00]/50 transition-colors text-sm"
-              />
-              <input
-                type="tel"
-                placeholder="Телефон"
-                className="w-full bg-[#0A0A0F] border border-white/10 rounded-xl px-5 py-3.5 text-white placeholder-white/30 focus:outline-none focus:border-[#FF8C00]/50 transition-colors text-sm"
-              />
-              <input
-                type="text"
-                placeholder="Откуда → Куда"
-                className="w-full bg-[#0A0A0F] border border-white/10 rounded-xl px-5 py-3.5 text-white placeholder-white/30 focus:outline-none focus:border-[#FF8C00]/50 transition-colors text-sm"
-              />
-              <textarea
-                placeholder="Комментарий (тип груза, вес, дата)"
-                rows={3}
-                className="w-full bg-[#0A0A0F] border border-white/10 rounded-xl px-5 py-3.5 text-white placeholder-white/30 focus:outline-none focus:border-[#FF8C00]/50 transition-colors text-sm resize-none"
-              />
-              <button className="w-full bg-gradient-to-r from-[#FF8C00] to-[#FFB700] text-black font-bold py-4 rounded-xl text-base hover:scale-[1.02] transition-all duration-200 shadow-lg shadow-[#FF8C00]/30 flex items-center justify-center gap-3">
+              <input type="text" placeholder="Ваше имя" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-5 py-3.5 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#1D4ED8]/50 focus:bg-white transition-colors text-sm" />
+              <input type="tel" placeholder="Телефон" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-5 py-3.5 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#1D4ED8]/50 focus:bg-white transition-colors text-sm" />
+              <input type="text" placeholder="Откуда → Куда" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-5 py-3.5 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#1D4ED8]/50 focus:bg-white transition-colors text-sm" />
+              <textarea placeholder="Комментарий (тип груза, вес, дата)" rows={3} className="w-full bg-gray-50 border border-gray-200 rounded-xl px-5 py-3.5 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#1D4ED8]/50 focus:bg-white transition-colors text-sm resize-none" />
+              <button className="w-full bg-gradient-to-r from-[#1D4ED8] to-[#2563EB] text-white font-bold py-4 rounded-xl text-base hover:scale-[1.02] transition-all duration-200 shadow-lg shadow-blue-300/40 flex items-center justify-center gap-3">
                 <Icon name="Send" size={18} />
                 Отправить заявку
               </button>
-              <p className="text-white/30 text-xs text-center">Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности</p>
+              <p className="text-gray-400 text-xs text-center">Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* FOOTER */}
-      <footer className="bg-[#0F0F1A] border-t border-white/5 py-10">
+      <footer className="bg-[#1E3A8A] py-10">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#FF8C00] to-[#FFB700] flex items-center justify-center">
-              <Icon name="Truck" size={16} className="text-black" />
+            <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center">
+              <Icon name="Truck" size={16} className="text-white" />
             </div>
-            <span className="font-display text-lg font-bold">ТРАНС<span className="text-[#FF8C00]">ЛОГИСТ</span></span>
+            <span className="font-display text-lg font-black text-white">ТРАНС<span className="text-blue-300">ЛОГИСТ</span></span>
           </div>
-          <p className="text-white/30 text-sm">© 2024 ТрансЛогист. Все права защищены.</p>
+          <p className="text-blue-200/60 text-sm">© 2024 ТрансЛогист. Все права защищены.</p>
           <div className="flex gap-6">
             {sections.slice(0, 4).map((s) => (
-              <button key={s.id} onClick={() => scrollTo(s.id)} className="text-white/30 text-sm hover:text-[#FF8C00] transition-colors">
+              <button key={s.id} onClick={() => scrollTo(s.id)} className="text-blue-200/60 text-sm hover:text-white transition-colors">
                 {s.label}
               </button>
             ))}
