@@ -3,14 +3,6 @@ import Icon from "@/components/ui/icon";
 
 const HERO_IMAGE = "https://cdn.poehali.dev/projects/4f2dc699-9cbe-47be-8c03-2f5cada8a80c/files/0dd39420-d43f-44df-b250-fa3111cc138e.jpg";
 
-const ROUTES = [
-  { label: "Москва → Санкт-Петербург", distance: 710, base: 2500 },
-  { label: "Москва → Казань", distance: 820, base: 2800 },
-  { label: "Москва → Екатеринбург", distance: 1780, base: 5200 },
-  { label: "Москва → Новосибирск", distance: 3360, base: 9500 },
-  { label: "Москва → Владивосток", distance: 9000, base: 24000 },
-  { label: "Санкт-Петербург → Екатеринбург", distance: 2100, base: 6100 },
-];
 
 const SERVICES = [
   { icon: "Truck", title: "Автодоставка", desc: "Доставка грузов автомобильным транспортом по всей России и СНГ", color: "#1D4ED8" },
@@ -44,17 +36,12 @@ const TEAM = [
 export default function Index() {
   const [activeSection, setActiveSection] = useState("home");
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [weight, setWeight] = useState(500);
-  const [routeIndex, setRouteIndex] = useState(0);
-  const [calcResult, setCalcResult] = useState<number | null>(null);
-  const [calcDone, setCalcDone] = useState(false);
   const [visibleStats, setVisibleStats] = useState(false);
   const statsRef = useRef<HTMLDivElement>(null);
 
   const sections = [
     { id: "home", label: "Главная" },
     { id: "services", label: "Услуги" },
-    { id: "calculator", label: "Калькулятор" },
     { id: "about", label: "О компании" },
     { id: "gallery", label: "Галерея" },
     { id: "contacts", label: "Контакты" },
@@ -90,13 +77,6 @@ export default function Index() {
     setMobileOpen(false);
   };
 
-  const calcPrice = () => {
-    const route = ROUTES[routeIndex];
-    const weightFactor = weight <= 100 ? 1 : weight <= 500 ? 1.3 : weight <= 1000 ? 1.6 : weight <= 5000 ? 2.1 : 2.8;
-    const price = Math.round(route.base * weightFactor);
-    setCalcResult(price);
-    setCalcDone(true);
-  };
 
   return (
     <div className="min-h-screen bg-white text-gray-900 font-body overflow-x-hidden">
@@ -190,18 +170,17 @@ export default function Index() {
 
             <div className="flex flex-wrap gap-4 animate-fade-up" style={{ animationDelay: "0.5s", opacity: 0 }}>
               <button
-                onClick={() => scrollTo("calculator")}
+                onClick={() => scrollTo("contacts")}
                 className="group flex items-center gap-3 bg-white text-[#1D4ED8] font-bold px-8 py-4 rounded-xl text-base hover:scale-105 transition-all duration-200 shadow-xl shadow-blue-900/30"
               >
-                <Icon name="Calculator" size={20} />
-                Рассчитать стоимость
+                Связаться с нами
                 <Icon name="ArrowRight" size={18} className="group-hover:translate-x-1 transition-transform" />
               </button>
               <button
-                onClick={() => scrollTo("contacts")}
+                onClick={() => scrollTo("services")}
                 className="flex items-center gap-3 border-2 border-white/50 text-white font-medium px-8 py-4 rounded-xl text-base hover:bg-white/10 hover:border-white transition-all duration-200"
               >
-                Связаться с нами
+                Наши услуги
               </button>
             </div>
           </div>
@@ -254,109 +233,6 @@ export default function Index() {
               <p className="text-gray-500 text-sm leading-relaxed">{s.desc}</p>
             </div>
           ))}
-        </div>
-      </section>
-
-      {/* CALCULATOR */}
-      <section id="calculator" className="py-24 bg-blue-50 border-y border-blue-100">
-        <div className="max-w-3xl mx-auto px-6">
-          <div className="text-center mb-12">
-            <span className="text-[#1D4ED8] text-sm font-bold uppercase tracking-widest">Быстро и точно</span>
-            <h2 className="font-display text-4xl md:text-5xl font-black mt-3 text-gray-900">КАЛЬКУЛЯТОР</h2>
-            <p className="text-gray-400 mt-1 text-sm tracking-widest uppercase">стоимости доставки</p>
-            <div className="w-16 h-1.5 bg-gradient-to-r from-[#1D4ED8] to-[#60A5FA] mx-auto mt-4 rounded-full" />
-          </div>
-
-          <div className="bg-white border border-blue-100 rounded-3xl p-8 md:p-10 shadow-xl shadow-blue-100/60">
-            <div className="space-y-8">
-
-              <div>
-                <label className="flex items-center gap-2 text-gray-600 text-sm font-semibold mb-3">
-                  <Icon name="MapPin" size={16} className="text-[#1D4ED8]" />
-                  Маршрут
-                </label>
-                <div className="grid grid-cols-1 gap-2">
-                  {ROUTES.map((r, i) => (
-                    <button
-                      key={i}
-                      onClick={() => { setRouteIndex(i); setCalcDone(false); }}
-                      className={`text-left px-5 py-3.5 rounded-xl text-sm font-medium transition-all duration-200 border ${
-                        routeIndex === i
-                          ? "bg-blue-50 border-[#1D4ED8]/50 text-[#1D4ED8]"
-                          : "border-gray-200 text-gray-500 hover:border-blue-200 hover:text-gray-800 hover:bg-blue-50/50"
-                      }`}
-                    >
-                      <span>{r.label}</span>
-                      <span className="float-right text-xs opacity-60">{r.distance.toLocaleString()} км</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <label className="flex items-center gap-2 text-gray-600 text-sm font-semibold mb-3">
-                  <Icon name="Weight" size={16} className="text-[#1D4ED8]" />
-                  Вес груза: <span className="text-[#1D4ED8] font-bold ml-1">{weight.toLocaleString()} кг</span>
-                </label>
-                <input
-                  type="range"
-                  min={10}
-                  max={10000}
-                  step={10}
-                  value={weight}
-                  onChange={(e) => { setWeight(Number(e.target.value)); setCalcDone(false); }}
-                  className="w-full h-2 rounded-full appearance-none cursor-pointer"
-                  style={{
-                    background: `linear-gradient(to right, #1D4ED8 0%, #60A5FA ${(weight / 10000) * 100}%, #E2E8F0 ${(weight / 10000) * 100}%, #E2E8F0 100%)`,
-                  }}
-                />
-                <div className="flex justify-between text-gray-400 text-xs mt-2">
-                  <span>10 кг</span><span>2 500 кг</span><span>5 000 кг</span><span>10 000 кг</span>
-                </div>
-                <div className="grid grid-cols-4 gap-2 mt-4">
-                  {[100, 500, 1000, 5000].map((w) => (
-                    <button
-                      key={w}
-                      onClick={() => { setWeight(w); setCalcDone(false); }}
-                      className={`py-2 rounded-lg text-xs font-semibold transition-all border ${
-                        weight === w
-                          ? "bg-blue-50 border-[#1D4ED8]/50 text-[#1D4ED8]"
-                          : "border-gray-200 text-gray-400 hover:text-gray-700 hover:border-blue-200"
-                      }`}
-                    >
-                      {w} кг
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <button
-                onClick={calcPrice}
-                className="w-full bg-gradient-to-r from-[#1D4ED8] to-[#2563EB] text-white font-bold py-4 rounded-xl text-base hover:scale-[1.02] transition-all duration-200 shadow-lg shadow-blue-300/40 flex items-center justify-center gap-3"
-              >
-                <Icon name="Calculator" size={20} />
-                Рассчитать стоимость
-              </button>
-
-              {calcDone && calcResult && (
-                <div className="bg-gradient-to-r from-blue-50 to-blue-100/60 border border-[#1D4ED8]/20 rounded-2xl p-6 animate-fade-up text-center">
-                  <p className="text-gray-500 text-sm mb-2">Ориентировочная стоимость</p>
-                  <p className="font-display text-5xl font-black text-[#1D4ED8]">
-                    {calcResult.toLocaleString()} ₽
-                  </p>
-                  <p className="text-gray-400 text-xs mt-3">{ROUTES[routeIndex].label} · {weight.toLocaleString()} кг</p>
-                  <p className="text-gray-400 text-xs mt-1">Точная стоимость зависит от типа груза и дополнительных услуг</p>
-                  <button
-                    onClick={() => scrollTo("contacts")}
-                    className="mt-4 inline-flex items-center gap-2 bg-[#1D4ED8] text-white font-bold px-6 py-2.5 rounded-xl text-sm hover:bg-[#1E40AF] transition-all shadow-md shadow-blue-200"
-                  >
-                    Оформить заявку
-                    <Icon name="ArrowRight" size={16} />
-                  </button>
-                </div>
-              )}
-            </div>
-          </div>
         </div>
       </section>
 
