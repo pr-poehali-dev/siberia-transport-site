@@ -332,6 +332,17 @@ export default function Index() {
         </div>
       </section>
 
+      {/* FLOATING CTA */}
+      <div className="fixed bottom-6 right-6 z-50">
+        <button
+          onClick={() => scrollTo("contacts")}
+          className="group flex items-center gap-3 bg-gradient-to-r from-[#1D4ED8] to-[#2563EB] text-white font-bold px-6 py-4 rounded-2xl shadow-2xl shadow-blue-500/40 hover:scale-105 transition-all duration-200"
+        >
+          <Icon name="FileText" size={20} />
+          <span className="hidden sm:inline">Оставить заявку</span>
+        </button>
+      </div>
+
       {/* FOOTER */}
       <footer className="bg-[#1E3A8A] py-10">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
